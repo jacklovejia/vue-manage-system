@@ -11,21 +11,21 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api':{
-          target:'http://jsonplaceholder.typicode.com',
+      /*'/api':{
+          target:'http://127.0.0.1:8081/jack/api',
           changeOrigin:true,
           pathRewrite:{
               '/api':''
           }
-      },
+      }*//*,
       '/ms':{
           target: 'https://www.easy-mock.com/mock/592501a391470c0ac1fab128',
           changeOrigin: true
-      }
+      }*/
     },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 80, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

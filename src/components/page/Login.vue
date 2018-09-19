@@ -3,8 +3,8 @@
         <div class="ms-login">
             <div class="ms-title">后台管理系统</div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content">
-                <el-form-item prop="username">
-                    <el-input v-model="ruleForm.username" placeholder="username">
+                <el-form-item prop="adminName">
+                    <el-input v-model="ruleForm.adminName" placeholder="adminName">
                         <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
                     </el-input>
                 </el-form-item>
@@ -16,22 +16,24 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
+                <p class="login-tips">Tips : 用户名和密码别瞎几把填。</p>
             </el-form>
         </div>
     </div>
 </template>
 
 <script>
+import adminApi from '../api/adminApi'
     export default {
         data: function(){
             return {
+
                 ruleForm: {
-                    username: 'admin',
+                    adminName: 'admin',
                     password: '123123'
                 },
                 rules: {
-                    username: [
+                    adminName: [
                         { required: true, message: '请输入用户名', trigger: 'blur' }
                     ],
                     password: [
@@ -44,8 +46,12 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        localStorage.setItem('ms_username',this.ruleForm.username);
-                        this.$router.push('/');
+                        localStorage.setItem('ms_adminName',this.ruleForm.adminName);
+                        adminApi.loginByUsername(this.ruleForm).then(() => {
+                            this.$message.success("登录成功");
+                            this.$router.push('/');
+                         })
+
                     } else {
                         console.log('error submit!!');
                         return false;

@@ -73,7 +73,7 @@ export default new Router({
                     // 权限页面
                     path: '/permission',
                     component: resolve => require(['../components/page/Permission.vue'], resolve),
-                    meta: { title: '权限测试', permission: true }
+                    meta: { title: '权限测试'/*, permission: true*/ }
                 },
                 {
                     path: '/404',
@@ -85,6 +85,7 @@ export default new Router({
                     component: resolve => require(['../components/page/403.vue'], resolve),
                     meta: { title: '403' }
                 }
+
             ]
         },
         {
