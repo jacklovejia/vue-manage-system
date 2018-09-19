@@ -3,10 +3,12 @@
  */
 import request from '@/utils/request'
 
+
 export default {
 
-    loginByUsername(data) {
-        console.log("121:"+data.adminName);
+    loginByUsername(param) {
+        const data = {adminName:param.adminName,password:param.password}
+        console.log(data);
         return request({
             url: '/v1/unsafe/login',
             method: 'post',

@@ -24,6 +24,7 @@
 
 <script>
 import adminApi from '../api/adminApi'
+import { getToken, setToken, removeToken } from '@/utils/auth'
     export default {
         data: function(){
             return {
@@ -45,17 +46,24 @@ import adminApi from '../api/adminApi'
         methods: {
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        localStorage.setItem('ms_adminName',this.ruleForm.adminName);
-                        adminApi.loginByUsername(this.ruleForm).then(() => {
-                            this.$message.success("登录成功");
-                            this.$router.push('/');
-                         })
-
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
+                 if (valid) {
+                     adminApi.loginByUsername(this.ruleForm).then(res => {
+                      this.loading = false
+                      console.log(res.data.status);
+                       if(res.data.status == 200){
+                         setToken(res.data.data.token)
+                         localStorage.setItem('ms_username',this.ruleForm.adminName);
+                         this.$router.push({path: '/'})
+                      }else{
+                       this.$message.success(res.data.msg);
+                      }
+                                }).catch(() => {
+                                  this.loading = false
+                                })
+                     } else {
+                         console.log('error submit!!');
+                         return false;
+                     }
                 });
             }
         }

@@ -19,7 +19,7 @@ service.interceptors.response.use(
    * 如通过xmlhttprequest 状态码标识 逻辑可写在下面error中
    */
   res => {
-    console.log("服务返回结果:"+res.status);
+    console.log("服务返回结果:"+res.data.status);
     if(res.status){
       //如果后台返回的json显示成功，pass
       return res;
