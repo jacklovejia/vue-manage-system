@@ -51,9 +51,9 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
                       this.loading = false
                       console.log(res.data.status);
                        if(res.data.status == 200){
-                         setToken(res.data.data.token)
                          localStorage.setItem('ms_username',this.ruleForm.adminName);
-                         this.$router.push({path: '/'})
+                         // setToken(res.data.data.token);
+                         this.$router.push({path: '/'});
                       }else{
                        this.$message.success(res.data.msg);
                       }

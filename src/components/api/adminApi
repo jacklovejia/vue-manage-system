@@ -7,13 +7,25 @@ import request from '@/utils/request'
 export default {
 
     loginByUsername(param) {
-        const data = {adminName:param.adminName,password:param.password}
+        const data = {adminName: param.adminName, password: param.password}
         console.log(data);
         return request({
             url: '/v1/unsafe/login',
             method: 'post',
             data
         })
+    },
+    queryAdminList(queryParam, pageParam) {
+        return request({
+            url: '/v1/unsafe/adminList',
+            method: 'post',
+            data: {
+                // ...queryParam,
+            current: pageParam.current,
+            size: pageParam.size
+        }
+    }
+    )
     },
 
     logout() {
@@ -27,7 +39,7 @@ export default {
         return request({
             url: '/auth/info',
             method: 'get',
-            params: { token }
+            params: {token}
         })
     },
 
